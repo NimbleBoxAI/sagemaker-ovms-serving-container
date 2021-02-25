@@ -6,7 +6,7 @@
         {
             "label": "build_image",
             "type": "shell",
-            "command": "./scripts/build.sh --version 2.1 --arch cpu",
+            "command": "./scripts/build.sh --version 2021.2.1 --arch cpu",
             "options": {
                 "env": {
                     "AWS_DEFAULT_REGION": "us-west-2"
