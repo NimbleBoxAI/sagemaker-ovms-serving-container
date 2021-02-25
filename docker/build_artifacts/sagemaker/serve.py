@@ -104,7 +104,7 @@ class ServiceManager(object):
         models = tfs_utils.find_models()
 
         if not models:
-            raise ValueError("no SavedModel bundles found!")
+            raise ValueError("no IR models found!")
 
         if self._tfs_default_model_name == "None":
             default_model = os.path.basename(models[0])
@@ -137,7 +137,7 @@ class ServiceManager(object):
         config += ']\n'
         config += "}\n"
 
-        log.info("tensorflow serving model config: \n%s\n", config)
+        log.info("ovms model config: \n%s\n", config)
 
         with open(self._tfs_config_path, "w") as f:
             f.write(config)
@@ -236,7 +236,7 @@ class ServiceManager(object):
             return template
 
     def _start_tfs(self):
-        self._log_version("tensorflow_model_server --version", "tensorflow version info:")
+        self._log_version("tensorflow_model_server --version", "ovms version info:")
         cmd = tfs_utils.tfs_command(
             self._tfs_grpc_port,
             self._tfs_rest_port,
@@ -244,9 +244,9 @@ class ServiceManager(object):
             self._tfs_enable_batching,
             self._tfs_batching_config_path,
         )
-        log.info("tensorflow serving command: {}".format(cmd))
+        log.info("ovms serving command: {}".format(cmd))
         p = subprocess.Popen(cmd.split())
-        log.info("started tensorflow serving (pid: %d)", p.pid)
+        log.info("started ovms serving (pid: %d)", p.pid)
         self._tfs = p
 
     def _start_gunicorn(self):
@@ -316,7 +316,7 @@ class ServiceManager(object):
         signal.signal(signal.SIGTERM, self._stop)
 
         if self._tfs_enable_multi_model_endpoint:
-            log.info("multi-model endpoint is enabled, TFS model servers will be started later")
+            log.info("multi-model endpoint is enabled, OVMS model servers will be started later")
         else:
             self._create_tfs_config()
             self._start_tfs()
@@ -349,7 +349,7 @@ class ServiceManager(object):
 
             elif pid == self._tfs.pid:
                 log.warning(
-                    "unexpected tensorflow serving exit (status: {}). restarting.".format(status))
+                    "unexpected ovms exit (status: {}). restarting.".format(status))
                 self._start_tfs()
 
             elif self._gunicorn and pid == self._gunicorn.pid:
