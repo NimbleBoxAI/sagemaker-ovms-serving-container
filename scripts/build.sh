@@ -28,6 +28,7 @@ docker build \
     -f docker/$short_version/Dockerfile.$arch \
     -t $repository:$full_version-$device \
     -t $repository:$short_version-$device \
+    -t ovms-serving:2.1-cpu \
     docker/$short_version/
 
 remove_ei_executable
