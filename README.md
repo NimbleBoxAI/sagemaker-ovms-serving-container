@@ -1,31 +1,17 @@
 # <img alt="SageMaker" src="branding/icon/sagemaker-banner.png" height="100">
 
-# SageMaker TensorFlow Serving Container
+# SageMaker OpenVINO Model Server Container
 
-SageMaker TensorFlow Serving Container is an a open source project that builds
-docker images for running TensorFlow Serving on
+SageMaker OVMS Serving Container is an a open source project that builds
+docker images for running OpenVINO Model Server on
 [Amazon SageMaker](https://aws.amazon.com/documentation/sagemaker/).
 
-Supported versions of TensorFlow: ``1.4.1``, ``1.5.0``, ``1.6.0``, ``1.7.0``, ``1.8.0``, ``1.9.0``, ``1.10.0``, ``1.11.0``, ``1.12.0``, ``1.13.1``, ``1.14.0``, ``1.15.0``, ``2.0.0``.
+Supported versions of OVMS: ``2021.2.1``
 
-Supported versions of TensorFlow for Elastic Inference: ``1.11.0``, ``1.12.0``, ``1.13.1``, ``1.14.0``.
+ECR repositories for SageMaker built OVMS Serving Container:
 
-ECR repositories for SageMaker built TensorFlow Serving Container:
-
-- `'tensorflow-inference'` for any new version starting with ``1.13.0`` in the following AWS accounts:
-  - `"871362719292"` in `"ap-east-1"`;
-  - `"217643126080"` in `"me-south-1"`;
-  - `"886529160074"` in `"us-iso-east-1"`;
-  - `"763104351884"` in other SageMaker public regions.
-- `'sagemaker-tensorflow-serving'` for ``1.4.1``, ``1.5.0``, ``1.6.0``, ``1.7.0``, ``1.8.0``, ``1.9.0``, ``1.10.0``, ``1.11.0``, ``1.12.0`` versions in the following AWS accounts:
-  - `"057415533634"` in `"ap-east-1"`;
-  - `"724002660598"` in `"me-south-1"`;
-  - `"520713654638"` in other SageMaker public regions.
-
-ECR repositories for SageMaker built TensorFlow Serving Container for Elastic Inference:
-
-- `'tensorflow-inference-eia'` for any new version starting with ``1.14.0`` in the same AWS accounts as TensorFlow Serving Container for newer TensorFlow versions listed above;
-- `'sagemaker-tensorflow-serving-eia'` for ``1.11.0``, ``1.12.0``, ``1.13.1`` versions in the same AWS accounts as TensorFlow Serving Container for older TensorFlow versions listed above.
+- `'sagemaker-ovms-serving'` for all versions in the following AWS accounts:
+  - `"553900043809"` in `"us-east-1"`;
 
 This documentation covers building and testing these docker images.
 
@@ -81,9 +67,7 @@ processor type (e.g. "cpu", "gpu", "ei") has a different Dockerfile in each grou
 To build an image, run the `./scripts/build.sh` script:
 
 ```bash
-./scripts/build.sh --version 1.13 --arch cpu
-./scripts/build.sh --version 1.13 --arch gpu
-./scripts/build.sh --version 1.13 --arch eia
+./scripts/build.sh --version 2021.2.1 --arch cpu
 ```
 
 
@@ -92,9 +76,7 @@ in SageMaker, you need to publish it to an ECR repository in your account. The
 `./scripts/publish.sh` script makes that easy:
 
 ```bash
-./scripts/publish.sh --version 1.13 --arch cpu
-./scripts/publish.sh --version 1.13 --arch gpu
-./scripts/publish.sh --version 1.13 --arch eia
+./scripts/publish.sh --version 2021.2.1 --arch cpu
 ```
 
 Note: this will publish to ECR in your default region. Use the `--region` argument to
