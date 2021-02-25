@@ -2,3 +2,6 @@ __pycache__
 .tox/
 log.txt
 .idea/
+docker/*/sagemaker/*
+docker/*/*.py
+-build_artifacts/*
