@@ -9,7 +9,7 @@
             "command": "./scripts/build.sh --version 2021.2.1 --arch cpu",
             "options": {
                 "env": {
-                    "AWS_DEFAULT_REGION": "us-west-2"
+                    "AWS_DEFAULT_REGION": "us-east-1"
                 }
             },
             "problemMatcher": [],
