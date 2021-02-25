@@ -1,0 +1,22 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build_image",
+            "type": "shell",
+            "command": "./scripts/build.sh --version 2.1 --arch cpu",
+            "options": {
+                "env": {
+                    "AWS_DEFAULT_REGION": "us-west-2"
+                }
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
