@@ -17,6 +17,17 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "publish_image",
+            "type": "shell",
+            "command": "./scripts/publish.sh --version 2021.2.1 --arch cpu",
+            "options": {
+                "env": {
+                    "AWS_DEFAULT_REGION": "us-east-1"
+                }
+            },
+            "problemMatcher": []
         }
     ]
 }
