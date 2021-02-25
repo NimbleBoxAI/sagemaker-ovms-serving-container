@@ -64,7 +64,7 @@ function parse_std_args() {
     # defaults
     arch='cpu'
     version='1.13.0'
-    repository='sagemaker-tensorflow-serving'
+    repository='sagemaker-ovms-serving'
 
     aws_region=$(get_default_region)
     aws_account=$(get_aws_account)
