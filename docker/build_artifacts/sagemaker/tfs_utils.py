@@ -75,36 +75,38 @@ def parse_tfs_custom_attributes(req):
 
 
 def create_tfs_config_individual_model(model_name, base_path):
-    config = "model_config_list: {\n"
-    config += "  config: {\n"
-    config += "    name: '{}'\n".format(model_name)
-    config += "    base_path: '{}'\n".format(base_path)
-    config += "    model_platform: 'tensorflow'\n"
+    # TODO: find usage of this method
+    config = "{\n"
+    config += '"model_config_list": {\n'
+    config += '  "config": {\n'
+    config += '    "name": "{}"\n'.format(model_name)
+    config += '    "base_path": "{}"\n'.format(base_path)
+    # config += '    "model_platform": 'tensorflow'\n'
 
-    config += "    model_version_policy: {\n"
-    config += "      specific: {\n"
+    config += '    "model_version_policy": {\n'
+    config += '      "specific": {\n'
     for version in find_model_versions(base_path):
-        config += "        versions: {}\n".format(version)
-    config += "      }\n"
-    config += "    }\n"
+        config += '        "versions": {}\n'.format(version)
+    config += '      }\n'
+    config += '    }\n'
 
-    config += "  }\n"
-    config += "}\n"
+    config += '  }\n'
+    config += '}\n'
+    config += '}\n'
     return config
 
 
 def tfs_command(tfs_grpc_port,
                 tfs_rest_port,
                 tfs_config_path,
-                tfs_enable_batching,
-                tfs_batching_config_file):
-    cmd = "tensorflow_model_server " \
+                tfs_enable_batching="",
+                tfs_batching_config_file=""):
+    cmd = "/ovms/bin/ovms " \
           "--port={} " \
-          "--rest_api_port={} " \
-          "--model_config_file={} " \
-          "--max_num_load_retries=0 {}" \
-        .format(tfs_grpc_port, tfs_rest_port, tfs_config_path,
-                get_tfs_batching_args(tfs_enable_batching, tfs_batching_config_file))
+          "--rest_port={} " \
+          "--config_path={} " \
+             .format(tfs_grpc_port, tfs_rest_port, tfs_config_path)
+    #            get_tfs_batching_args(tfs_enable_batching, tfs_batching_config_file))
     return cmd
 
 
@@ -129,7 +131,8 @@ def _find_saved_model_files(path):
         if e.is_dir():
             yield from _find_saved_model_files(os.path.join(path, e.name))
         else:
-            if e.name == "saved_model.pb":
+            # TODO: better logic?
+            if e.name[-4:] == ".bin":
                 yield os.path.join(path, e.name)
 
 
