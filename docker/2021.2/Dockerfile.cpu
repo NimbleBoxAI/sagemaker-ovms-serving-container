@@ -83,7 +83,7 @@ EXPOSE 8500 8501
 RUN mkdir -p ${MODEL_BASE_PATH}
 
 # Copy prebuilt ovms from public image
-COPY --from=openvino/model_server:latest /ovms/ /ovms/
+COPY --from=openvino/model_server:2021.2.1 /ovms/ /ovms/
 
 # Create a script that runs the model server so we can use environment variables
 # while also passing in arguments from the docker command line
