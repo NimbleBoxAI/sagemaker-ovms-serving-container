@@ -236,7 +236,7 @@ class ServiceManager(object):
             return template
 
     def _start_tfs(self):
-        self._log_version("tensorflow_model_server --version", "ovms version info:")
+        self._log_version("/ovms/bin/ovms --version", "ovms version info:")
         cmd = tfs_utils.tfs_command(
             self._tfs_grpc_port,
             self._tfs_rest_port,
