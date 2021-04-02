@@ -10,7 +10,7 @@
             "options": {
                 "env": {
                     "AWS_DEFAULT_REGION": "us-east-1",
-                    "VER": "2021.2-test"
+                    "VER": "2021.2"
                 }
             },
             "problemMatcher": [],
